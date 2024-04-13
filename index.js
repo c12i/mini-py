@@ -24,7 +24,6 @@ class MiniPy extends HTMLElement {
     this._initializePyodideAndRunCode();
   }
 
-
   _initializePyodideAndRunCode() {
     this._dispatchEvent("pyodide-loading");
     if (!window.pyodidePromise) {
