@@ -4,11 +4,11 @@ An **extremely** simplified way to run python in the browser with a similar API 
 
 
 ```html
-    <mini-py>
+<mini-py>
 import js
 
 div = js.document.createElement("h1")
 div.innerHTML = "This element was created from Python"
 js.document.body.prepend(div)
-    </mini-py>
+</mini-py>
 ```
