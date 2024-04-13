@@ -1,4 +1,4 @@
-#  python-script
+#  mini-py
 
 An **extremely** simplified way to run python in the browser with a similar API to the [`<py-script></py-script>`](https://pyscript.net) tag, re-implemented as `<mini-py></mini-py>`, using [web-components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) and [pyodide](https://pyodide.org)
 
