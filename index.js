@@ -9,9 +9,13 @@ class MiniPy extends HTMLElement {
     this.code = this.textContent.trim();
     this.textContent = "";
     this.autoRun = this.hasAttribute("autorun") ? (this.getAttribute("autorun") === "true") : true;
-    if (this.autoRun) {
-      this._initializePyodideAndRunCode();
-    }
+    this._ensurePyodideLoaded().then(() => {
+      if (this.autoRun) {
+        this._initializePyodideAndRunCode();
+      }
+    }).catch(error => {
+      console.error('Failed to load Pyodide:', error);
+    });
   }
 
   disconnectedCallback() {
@@ -42,7 +46,7 @@ class MiniPy extends HTMLElement {
         console.log(result);
       })
       .catch(error => {
-        this._dispatchEvent('code-execution-error', {error: error});
+        this._dispatchEvent('code-execution-error', { error });
         console.error("Python execution error:", error);
       });
   }
@@ -54,6 +58,29 @@ class MiniPy extends HTMLElement {
       detail
     })
     this.dispatchEvent(event)
+  }
+
+  _ensurePyodideLoaded() {
+    return new Promise((resolve, reject) => {
+      if (window.pyodide) {
+        resolve();
+      } else if (!window.pyodideLoadingPromise) {
+        // load pyodide via cdn
+        const script = document.createElement('script');
+        script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js";
+        script.onload = () => {
+          window.pyodideLoadingPromise = loadPyodide();
+          window.pyodideLoadingPromise.then(() => {
+            window.pyodide = true;
+            resolve();
+          });
+        };
+        script.onerror = reject;
+        document.head.appendChild(script);
+      } else {
+        window.pyodideLoadingPromise.then(resolve).catch(reject);
+      }
+    });
   }
 }
 
