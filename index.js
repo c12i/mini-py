@@ -1,17 +1,28 @@
-class PythonElement extends HTMLElement {
+class MiniPy extends HTMLElement {
   constructor() {
     super();
-    this.code = this.textContent;
-    this.textContent = ''
-    loadPyodide()
+    this.code = ''
+  }
+
+  connectedCallback() {
+    this.code = this.textContent.trim();
+    this.textContent = '';
+    this.initializePyodideAndRunCode();
+  }
+
+  initializePyodideAndRunCode() {
+    if (!window.pyodidePromise) {
+      window.pyodidePromise = loadPyodide();
+    }
+    window.pyodidePromise
       .then(pyodide => {
-        console.log(pyodide.runPython(this.code));
+        return pyodide.runPython(this.code);
       })
-      .catch(e => {
-        throw e;
-      })
+      .then(console.log)
+      .catch(error => {
+        console.error('Python execution error:', error);
+      });
   }
 }
 
-customElements.define('mini-py', PythonElement);
-
+customElements.define('mini-py', MiniPy);
