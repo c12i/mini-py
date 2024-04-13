@@ -18,9 +18,9 @@ Runs the Python code contained within the `mini-py` element by default.
 <mini-py>
 import js
 
-div = js.document.createElement("h1")
-div.innerHTML = "This element was created from Python"
-js.document.body.prepend(div)
+h1 = js.document.createElement("h1")
+h1.innerHTML = "This element was created from Python"
+js.document.body.prepend(h1)
 </mini-py>
 ```
 
