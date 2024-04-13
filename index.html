@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+  </head>
+  <body>
+    <mini-py>
+import js
+
+div = js.document.createElement("h1")
+div.innerHTML = "This element was created from Python"
+js.document.body.prepend(div)
+    </mini-py>
+    <script src="index.js"></script>
+  </body>
+</html>
