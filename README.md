@@ -1,11 +1,18 @@
-#  mini-py
+# mini-py
 
-An **extremely** simplified way to run python in the browser with a similar API to the [`<py-script></py-script>`](https://pyscript.net) tag, re-implemented as `<mini-py></mini-py>`, using [web-components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) and [pyodide](https://pyodide.org)
+`mini-py` is a streamlined Web Component that enables the execution of Python code directly within the browser. This component attempts to replicate the [`<py-script></py-script>`](https://pyscript.net) tag, utilizing [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) and [Pyodide](https://pyodide.org) to run Python scripts seamlessly on web pages.
 
+## Features
+
+- **Easy Integration**: Embed and run Python code just by writing it within the `<mini-py>` tags.
+- **Programmatic Execution**: Control when your Python scripts execute with JavaScript.
+- **Event-Driven**: Respond to various stages of Python code execution with custom events.
 
 ## Examples
 
-- default behaviour is to run the python code in the `mini-py` element
+### Default Behavior
+
+Runs the Python code contained within the `mini-py` element by default.
 
 ```html
 <mini-py>
@@ -17,14 +24,18 @@ js.document.body.prepend(div)
 </mini-py>
 ```
 
-- with `autoRun` set to `"false"`
+### Manual Triggering
+
+Optionally prevent automatic execution (`autoRun="false"`) and trigger Python code programmatically.
 
 ```html
 <mini-py autorun="false">print("Hello, World!")</mini-py>
 <button onclick="document.querySelector('mini-py').runCode()">Run Code</button>
 ```
 
-- event handling
+### Event Handling
+
+Monitor the lifecycle of Python code execution using custom events.
 
 ```html
 <mini-py id="python-script">print("Hello, World!")</mini-py>
@@ -52,3 +63,11 @@ js.document.body.prepend(div)
   });
 </script>
 ```
+
+## Installation
+
+TODO
+
+## Browser Compatibility
+
+`mini-py` uses modern web technologies that are supported in most recent versions of major browsers. For full compatibility details, refer to the MDN Web Docs on Web Components.
