@@ -1,3 +1,5 @@
+const PYODIDE_CDN_URI = "https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js";
+
 class MiniPy extends HTMLElement {
   constructor() {
     super();
@@ -67,7 +69,7 @@ class MiniPy extends HTMLElement {
       } else if (!window.pyodideLoadingPromise) {
         // load pyodide via cdn
         const script = document.createElement('script');
-        script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js";
+        script.src = PYODIDE_CDN_URI;
         script.onload = () => {
           window.pyodideLoadingPromise = loadPyodide();
           window.pyodideLoadingPromise.then(() => {
